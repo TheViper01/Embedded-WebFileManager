@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>example</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #container { margin-right: auto; margin-left: auto; max-width: 480px; }
+      #info { background: #e0f0f0; border-radius: .5em; padding: 2em;  }
+      #wrapper { margin-top: 1em; }
+    </style>
+  </head>
+  <body>
+
+    <div id="wrapper">
+      <input type="file" id="el1" style="display: none"/>
+      <button id="el2">New file</button>
+      <div id="el3"></div>
+    </div>
+
+    <form action="javascript:createDirectorySubmit()" method="GET">
+      <label for="newdirname"></label>
+          <input type="text" id="newdirname" name="newdirname" minlength="1" maxlength="20" required>
+      <button type="submit">New dir</button>
+    </form>
+
+    <table>
+
+      <thead id="thead_">
+        <tr>
+          <th>Name</th>
+          <th>Modified</th>
+          <th>Size</th>
+          <th></th>
+          <th></th>
+      </tr>
+      </thead>
+
+      <tbody id="tbody_">
+
+      </tbody>
+    </table>
+
+
+  </body>
+  <script src="/frontend/file_manager/app.js"></script>
+</html>

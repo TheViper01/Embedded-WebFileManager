@@ -1,0 +1,41 @@
+sqlplus / AS SYSDBA
+
+sqlplus c##badboy/a AS SYSDBA
+
+
+sqlplus / AS C##badboy
+
+SET LINESIZE 128
+
+SELECT table_name 
+FROM dba_tables;
+
+
+SELECT table_name FROM user_tables;
+
+SELECT * FROM sys.databases;
+
+
+
+ALTER TABLE evidenta_animale ADD gggg integer;
+ALTER TABLE evidenta_animale DROP COLUMN gggg;
+
+
+alter pluggable database XEPDB1 open;
+alter database mount;
+alter database open;
+
+create user badboy identified by a;
+
+create user C##badboy
+identified by a
+default tablespace users
+temporary tablespace temp
+account unlock
+quota unlimited on users
+profile default;
+
+GRANT ALL PRIVILEGES TO C##badboy;
+grant create session to C##badboy;
+
+select username, created, common from dba_users;
