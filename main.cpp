@@ -34,7 +34,14 @@ static void main_callback(struct mg_connection* c, int ev, void* ev_data, void* 
         hm = (struct mg_http_message*)ev_data;
         printf("URI: %.*s\n", hm->uri.len, hm->uri.ptr);
 
-        if (hm->uri.len >= strlen(API_FILE_ENDPOINT) && strncasecmp(hm->uri.ptr, API_FILE_ENDPOINT, MIN(hm->uri.len, strlen(API_FILE_ENDPOINT))) == 0) {
+        // redirect to resources page
+        if (hm->uri.len == 1 && hm->uri.ptr[0] == '/') {
+            strcpy(tempString, "Location: ");
+            strcpy(&(tempString[strlen(tempString)]), API_FRONTEND_RESOURCE_ENDPOINT);
+            strcpy(&(tempString[strlen(tempString)]), "/\n");
+            mg_http_reply(c, 308, tempString, "\n");
+        }
+        else if (hm->uri.len >= strlen(API_FILE_ENDPOINT) && strncasecmp(hm->uri.ptr, API_FILE_ENDPOINT, MIN(hm->uri.len, strlen(API_FILE_ENDPOINT))) == 0) {
             strcpy(tempString, FILE_DIRECTORY);
             memset(tempString + strlen(tempString), 0, MG_PATH_MAX);
             mg_url_decode(hm->uri.ptr + strlen(API_FILE_ENDPOINT), hm->uri.len - strlen(API_FILE_ENDPOINT), &(tempString[strlen(tempString)]), MG_PATH_MAX, 0);
